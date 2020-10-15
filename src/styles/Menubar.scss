@@ -1,0 +1,67 @@
+@import "helpers";
+
+.menubar {
+  border-bottom: 2px solid $color-foreground;
+  line-height: 2rem;
+  padding: 0 1rem;
+  position: relative;
+}
+
+.item {
+  display: inline-block;
+  margin-right: 2rem;
+  position: relative;
+  user-select: none;
+}
+
+.itemLabel {
+  cursor: pointer;
+}
+
+.itemLabelDisabled {
+  cursor: not-allowed;
+}
+
+.menu {
+  position: absolute;
+  top: 2.5rem;
+  left: 0;
+  z-index: 1;
+}
+
+.container {
+  min-width: 16rem;
+  padding: 0.5rem 0;
+  border: 2px solid $color-foreground;
+  background-color: $color-background;
+}
+
+.content {
+  padding: 0 1rem;
+  border-bottom: 1px solid $color-foreground;
+  margin-bottom: 0.5rem;
+}
+
+.row {
+  color: $color-foreground;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 0 1rem;
+  white-space: nowrap;
+  display: block;
+
+  &:hover {
+    background-color: $color-foreground;
+    color: $color-background;
+  }
+}
+
+.shadow {
+  composes: shadow from "./_helpers.scss";
+}
+
+.time {
+  position: absolute;
+  top: 0;
+  right: 1rem;
+}

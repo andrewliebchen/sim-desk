@@ -1,0 +1,103 @@
+@import "helpers";
+
+$button-size: 30px;
+$button-offset: 3px;
+$toolbar-width: $button-size * 2 + $button-offset * 6;
+
+@keyframes bar {
+  from {
+    transform: scaleY(0.25);
+  }
+
+  to {
+    transform: scaleY(1);
+  }
+}
+
+.container {
+  z-index: 999;
+  position: absolute;
+}
+
+.toolbar {
+  @include border;
+  box-sizing: content-box;
+  width: $toolbar-width;
+  background-color: $color-background;
+  margin: 4px 6px 6px;
+
+  &::after {
+    z-index: -1;
+    content: "";
+  }
+}
+
+.header {
+  composes: header from "./_helpers.scss";
+}
+
+.tools {
+  padding: $button-offset;
+}
+
+.button {
+  transition: 0.1s ease-in-out;
+  height: $button-size;
+  width: $button-size;
+  display: inline-block;
+  border: 2px solid $color-foreground;
+  line-height: $button-size;
+  background-color: $color-background;
+  padding: 0;
+  margin: $button-offset;
+  outline: none;
+  fill: $color-foreground;
+
+  &:hover {
+    background-color: $color-foreground;
+    fill: $color-background;
+  }
+
+  &:focus {
+    box-shadow: $button-focus;
+  }
+}
+
+.buttonSelected {
+  composes: button;
+  box-shadow: $button-focus;
+}
+
+.graph {
+  @include dots;
+  width: $toolbar-width;
+  height: $toolbar-width;
+  border-top: 1px solid;
+  display: flex;
+  padding: 6px;
+}
+
+.barContainer {
+  flex: 1;
+  margin: 6px;
+  position: relative;
+}
+
+.bar {
+  // animation: bar 6s steps(4, start) infinite alternate-reverse;
+  transform-origin: 50% 100%;
+  background-color: $color-foreground;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.bar-1 {
+  animation-delay: 0.5s;
+}
+
+.shadow {
+  composes: shadow from "./_helpers.scss";
+}

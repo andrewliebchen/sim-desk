@@ -1,0 +1,39 @@
+@import "helpers";
+
+.container {
+  position: relative;
+  z-index: 9999;
+}
+
+.contentContainer {
+  position: fixed;
+  z-index: 2;
+  top: 40%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+}
+
+.content {
+  @include border;
+  background-color: $color-background;
+  width: 45vw;
+  position: relative;
+  z-index: 1;
+  padding: 1rem;
+}
+
+.shadow {
+  composes: shadow from "./_helpers.scss";
+  right: -1rem;
+  bottom: -1rem;
+}
+
+.background {
+  @include dots;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba($color-background, 0.4);
+}

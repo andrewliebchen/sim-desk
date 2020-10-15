@@ -1,0 +1,38 @@
+@import "helpers";
+
+.stroke {
+  fill: none;
+  stroke-miterlimit: 10;
+}
+
+.strokeThickDark {
+  composes: stroke;
+  stroke: $color-foreground;
+}
+
+.strokeThinDark {
+  composes: stroke;
+  stroke-width: 0.5;
+  stroke: $color-foreground;
+}
+
+.strokeThickLight {
+  composes: stroke;
+  stroke: $color-background;
+  stroke-linecap: round;
+}
+
+.strokeThinLight {
+  composes: stroke;
+  stroke-width: 0.5;
+  stroke: $color-background;
+  stroke-linecap: round;
+}
+
+.fillDark {
+  fill: $color-foreground;
+}
+
+.fillLight {
+  fill: $color-background;
+}

@@ -1,0 +1,59 @@
+@import "helpers";
+
+$outline-width: 3px;
+
+.desk {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  border: $outline-width solid $color-foreground;
+  border-bottom: 0;
+  background-color: $color-background;
+  z-index: 1;
+  user-select:none;
+
+  &::after {
+    content: "";
+    border: $outline-width solid $color-foreground;
+    border-top: 1px solid $color-foreground;
+    position: absolute;
+    top: 100%;
+    bottom: -10px;
+    left: -($outline-width);
+    right: -($outline-width);
+    background-color: inherit;
+  }
+}
+
+.leg {
+  position: absolute;
+  top: 100%;
+}
+
+.leftLeg {
+  composes: leg;
+  left: 0;
+}
+
+.rightLeg {
+  composes: leg;
+  transform: scaleX(-1);
+  right: 0;
+}
+
+.legGraphic {
+  fill: none;
+  stroke: $color-foreground;
+  stroke-width: 2;
+  stroke-miterlimit: 10;
+}
+
+.shadow {
+  @include dots;
+  left: 50%;
+  margin: $table-z 0 0 1.5rem;
+  position: absolute;
+  top: 20%;
+  transform: translate3d(-50%, -50%, 0);
+}

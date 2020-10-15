@@ -1,0 +1,21 @@
+@import "helpers";
+
+.footer {
+  position: fixed;
+  bottom: $app-offset;
+  left: $app-offset;
+  right: $app-offset;
+  border-top: 2px solid $color-foreground;
+  line-height: 2rem;
+  padding: 0 1rem;
+  display: flex;
+}
+
+.notification {
+  flex: 1;
+}
+
+.budget {
+  flex: 1;
+  text-align: right;
+}

@@ -1,0 +1,55 @@
+@import "helpers";
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background-color: $color-background;
+  color: $color-foreground;
+  font-family: "tofino", "sf compact text", sans-serif;
+}
+
+p,
+h1,
+h2 {
+  margin: 0 0 1rem;
+  line-height: 1.5;
+}
+
+button,
+input {
+  appearance: none;
+  cursor: pointer;
+  outline: 0;
+}
+
+[data-hint] {
+  position: relative;
+
+  &::after {
+    content: attr(data-hint);
+    box-shadow: 0 0 0 2px $color-background;
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    background-color: $color-foreground;
+    color: $color-background;
+    line-height: 2;
+    padding: 0 0.5rem;
+    margin-left: 0.25rem;
+    transform: translateY(-50%);
+    opacity: 0;
+    pointer-events: none;
+    font-weight: bold;
+  }
+
+  &:hover {
+    z-index: 1;
+
+    &::after {
+      opacity: 1;
+    }
+  }
+}

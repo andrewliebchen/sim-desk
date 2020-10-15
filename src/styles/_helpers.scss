@@ -1,0 +1,59 @@
+// Variables
+$color-foreground: #007fff;
+$color-background: lighten($color-foreground, 45%);
+
+$button-focus: 0 0 0 1px $color-background, 0 0 0 3px $color-foreground;
+
+$table-z: 230px;
+$app-offset: 10px;
+
+// Mixins
+@mixin dots($size: 4px, $color: $color-foreground) {
+  $position: $size / 2;
+  background-image:
+    radial-gradient($color-foreground 15%, transparent 16%),
+    radial-gradient($color-foreground 15%, transparent 16%);
+  background-size: $size $size;
+  background-position: 0 0, $position $position;
+}
+
+@mixin border {
+  box-shadow:
+    0 0 0 2px $color-foreground,
+    0 0 0 4px $color-background,
+    0 0 0 6px $color-foreground;
+}
+
+
+@mixin lines($width: 3px) {
+  background-color: $color-background;
+  background-image: linear-gradient(transparent 50%, $color-foreground 50%);
+  background-size: $width $width;
+}
+
+// Shared classes
+.header {
+  @include lines;
+  text-align: center;
+  font-weight: bold;
+  cursor: move;
+
+  span {
+    background-color: $color-background;
+    margin: 3px 0 6px;
+    display: inline-block;
+    padding: 0 3px;
+    position: relative;
+  }
+}
+
+.shadow {
+  $offset: 0.5rem;
+  @include dots;
+  position: absolute;
+  top: $offset;
+  left: $offset;
+  right: (-$offset);
+  bottom: (-$offset);
+  z-index: -1;
+}

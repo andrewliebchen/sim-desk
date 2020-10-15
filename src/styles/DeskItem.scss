@@ -1,0 +1,12 @@
+@import "helpers";
+
+.wrapper {
+  user-select: none;
+  position: absolute;
+  cursor: move;
+}
+
+.graphic {
+  display: block;
+  fill: $color-foreground;
+}

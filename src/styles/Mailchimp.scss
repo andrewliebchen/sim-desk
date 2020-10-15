@@ -1,0 +1,56 @@
+@import "helpers";
+
+$height: 2rem;
+$button-width: 4.5rem;
+
+.form {
+
+}
+
+.label {
+  font-size: 0.8rem;
+  display: block;
+}
+
+.container {
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.input {
+  $offset: 0.5rem;
+  border: 2px solid;
+  color: $color-foreground;
+  padding: $offset;
+  padding-right: $button-width + $offset;
+  line-height: $height;
+  height: $height;
+  background-color: transparent;
+  outline: 0;
+  display: block;
+  width: 100%;
+
+  &:focus {
+    box-shadow: $button-focus;
+  }
+}
+
+.submit {
+  display: block;
+  background-color: $color-foreground;
+  color: $color-background;
+  border: 0;
+  line-height: $height;
+  padding: 0 0.5rem;
+  height: $height;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: $button-width;
+  outline: 0;
+
+  &:focus,
+  &:active {
+    box-shadow: $button-focus;
+  }
+}
