@@ -1,34 +1,27 @@
-import React, { Component } from "react";
-import _ from "lodash";
+import { Box, Text } from "theme-ui";
 import format from "format-number";
+import React from "react";
 import Tools from "./Tools";
 
-class Footer extends Component {
-  render() {
-    const { buffer, deleteMode, budget } = this.props;
-    return (
-      <footer className={"styles.footer"}>
-        <div className={"styles.notification"}>
-          {buffer ? (
-            <span>
-              <strong>
-                {_.capitalize(buffer)}{" "}
-                {`$${_.find(Tools, { name: buffer }).price}`}
-              </strong>
-              <span> Place item on desk to purchase</span>
-            </span>
-          ) : null}
-          {deleteMode ? <strong>Click tool to delete</strong> : null}
-        </div>
-        <div className={"styles.budget"}>
-          Budget{" "}
-          <strong>
-            {format({ prefix: "$" })(budget, { integerSeparator: true })}
-          </strong>
-        </div>
-      </footer>
-    );
-  }
-}
+const Footer = (props) => (
+  <Box className={"styles.footer"}>
+    <Box className={"styles.notification"}>
+      {props.buffer ? (
+        <Text>
+          <b>
+            {props.buffer} $
+            {Tools.find((tool) => tool.name === props.buffer).price}
+          </b>{" "}
+          Place item on desk to purchase
+        </Text>
+      ) : null}
+      {props.deleteMode && <Text>Click tool to delete</Text>}
+    </Box>
+    <Text className={"styles.budget"}>
+      Budget{" "}
+      <b>{format({ prefix: "$" })(props.budget, { integerSeparator: true })}</b>
+    </Text>
+  </Box>
+);
 
 export default Footer;
