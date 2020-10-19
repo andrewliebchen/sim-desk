@@ -1,44 +1,41 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import _ from "lodash";
+import { Box } from "theme-ui";
 import Draggable from "react-draggable";
+import PropTypes from "prop-types";
+import React from "react";
 import Tools from "./Tools";
 
-class DeskItem extends Component {
-  static propTypes = {
-    tool: PropTypes.object.isRequired,
-    index: PropTypes.number,
-    toolClick: PropTypes.func,
-  };
-
-  render() {
-    const { tool, index, toolClick } = this.props;
-    const params = _.find(Tools, { name: tool.name });
-    return (
-      <Draggable
-        defaultPosition={{ x: tool.initX, y: tool.initY }}
-        bounds="parent"
-        zIndex={index}
+const DeskItem = (props) => {
+  const params = Tools.find((tool) => tool.name === props.tool.name);
+  return (
+    <Draggable
+      defaultPosition={{ x: props.tool.initX, y: props.tool.initY }}
+      bounds="parent"
+      zIndex={props.index}
+    >
+      <Box
+        className={"styles.wrapper"}
+        onClick={props.toolClick.bind(null, props.tool.id)}
       >
-        <div
-          className={"styles.wrapper"}
-          onClick={toolClick.bind(null, tool.id)}
+        <svg
+          version="1.1"
+          x="0px"
+          y="0px"
+          width={`${params.width}px`}
+          height={`${params.height}px`}
+          viewBox={`0 0 ${params.width} ${params.height}`}
+          className={"styles.graphic"}
         >
-          <svg
-            version="1.1"
-            x="0px"
-            y="0px"
-            width={`${params.width}px`}
-            height={`${params.height}px`}
-            viewBox={`0 0 ${params.width} ${params.height}`}
-            className={"styles.graphic"}
-          >
-            {params.graphic}
-          </svg>
-        </div>
-      </Draggable>
-    );
-  }
-}
+          {params.graphic}
+        </svg>
+      </Box>
+    </Draggable>
+  );
+};
+
+DeskItem.propTypes = {
+  tool: PropTypes.object.isRequired,
+  index: PropTypes.number,
+  toolClick: PropTypes.func,
+};
 
 export default DeskItem;
