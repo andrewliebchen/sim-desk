@@ -1,5 +1,5 @@
-import React, { useState } from "react";
 import AppContext from "./AppContext";
+import React, { useState } from "react";
 
 const AppProvider = (props) => {
   const [state, setState] = useState({
@@ -7,7 +7,6 @@ const AppProvider = (props) => {
     deleteMode: false,
     budget: 10000,
     buffer: null,
-    welcomeModal: true,
     deskSize: {
       width: 600,
       height: 300,
@@ -18,8 +17,8 @@ const AppProvider = (props) => {
     <AppContext.Provider
       value={{
         ...props,
-        state: state,
-        setState: setState,
+        ...state,
+        set: setState,
       }}
     >
       {props.children}

@@ -1,7 +1,10 @@
 import { Box } from "theme-ui";
+import AppContext from "./AppContext";
 import DeskItem from "./DeskItem";
 import PropTypes from "prop-types";
+import randomToken from "random-token";
 import React from "react";
+import Tools from "./Tools";
 
 const Leg = (props) => (
   <svg
@@ -18,37 +21,84 @@ const Leg = (props) => (
   </svg>
 );
 
-const Desk = (props) => (
-  <Box className={"styles.container"}>
-    <Box
-      className={"styles.desk"}
-      onClick={props.deskClick}
-      sx={{
-        height: props.deskSize.height,
-        width: props.deskSize.width,
-      }}
-    >
-      {props.tools.length > 0
-        ? props.tools.map((tool, i) => (
-            <DeskItem
-              tool={tool}
-              toolClick={props.toolClick}
-              index={i}
-              key={tool.id}
-            />
-          ))
-        : null}
-      <Leg side="left" />
-      <Leg side="right" />
-    </Box>
-    <Box
-      className={"styles.shadow"}
-      sx={{
-        height: props.deskSize.height,
-        width: props.deskSize.width,
-      }}
-    />
-  </Box>
+const Desk = () => (
+  <AppContext.Consumer>
+    {(props) => (
+      <Box className={"styles.container"}>
+        <Box
+          className={"styles.desk"}
+          onClick={(event) => {
+            const { tools, budget, buffer, deleteMode, deskSize } = props;
+            if (buffer) {
+              const deskOffset = 6;
+              const toolData = Tools.find((tool) => tool.name === buffer);
+              const price = toolData.price;
+
+              const targetOffsetX = event.target.offsetWidth * 0.5;
+              const targetOffsetY = event.target.offsetHeight * 0.5;
+              const toolOffsetX = toolData ? toolData.width * 0.5 : null;
+              const toolOffsetY = toolData ? toolData.height * 0.5 : null;
+              let initX =
+                event.clientX - event.target.offsetLeft + targetOffsetX;
+              let initY =
+                event.clientY - event.target.offsetTop + targetOffsetY;
+
+              // If tool placement overlaps desktop
+              if (initX + toolOffsetX > deskSize.width) {
+                initX = deskSize.width - toolOffsetX - deskOffset;
+              }
+              if (initX - toolOffsetX < deskOffset) {
+                initX = toolOffsetX;
+              }
+              if (initY - toolOffsetY < 0) {
+                initY = toolOffsetY;
+              }
+              if (initY + toolOffsetY > deskSize.height) {
+                initY = deskSize.height - toolOffsetY - 3;
+              }
+
+              if (budget >= price && buffer && !deleteMode) {
+                props.set({
+                  tools: [
+                    ...tools,
+                    {
+                      name: buffer,
+                      id: randomToken(5),
+                      initX: initX - toolOffsetX,
+                      initY: initY - toolOffsetY,
+                    },
+                  ],
+                  budget: budget - price,
+                  buffer: null,
+                });
+              } else {
+                props.set({ buffer: "Not enough money!" });
+              }
+            }
+          }}
+          sx={{
+            height: props.deskSize.height,
+            width: props.deskSize.width,
+          }}
+        >
+          {props.tools.length > 0
+            ? props.tools.map((tool, i) => (
+                <DeskItem tool={tool} index={i} key={tool.id} />
+              ))
+            : null}
+          <Leg side="left" />
+          <Leg side="right" />
+        </Box>
+        <Box
+          className={"styles.shadow"}
+          sx={{
+            height: props.deskSize.height,
+            width: props.deskSize.width,
+          }}
+        />
+      </Box>
+    )}
+  </AppContext.Consumer>
 );
 
 Desk.propTypes = {
