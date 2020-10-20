@@ -1,7 +1,7 @@
-import "./index.css";
 import { ThemeProvider } from "theme-ui";
 import * as serviceWorker from "./serviceWorker";
 import App from "./App";
+import AppProvider from "./AppProvider";
 import React from "react";
 import ReactDOM from "react-dom";
 import theme from "./theme";
@@ -9,7 +9,9 @@ import theme from "./theme";
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <App />
+      <AppProvider>
+        <App />
+      </AppProvider>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")
