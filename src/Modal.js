@@ -1,23 +1,19 @@
-import React, { Component } from "react";
+import { Box } from "theme-ui";
 import PropTypes from "prop-types";
+import React from "react";
 
-class Modal extends Component {
-  static propTypes = {
-    toggle: PropTypes.func,
-  };
+const Modal = (props) => (
+  <Box className={"styles.container"}>
+    <Box className={"styles.contentContainer"}>
+      <Box className={"styles.content"} {...props} />
+      <Box className={"styles.shadow"} />
+    </Box>
+    <Box className={"styles.background"} onClick={props.toggle} />
+  </Box>
+);
 
-  render() {
-    const { toggle, children } = this.props;
-    return (
-      <div className={"styles.container"}>
-        <div className={"styles.contentContainer"}>
-          <div className={"styles.content"}>{children}</div>
-          <div className={"styles.shadow"} />
-        </div>
-        <div className={"styles.background"} onClick={toggle} />
-      </div>
-    );
-  }
-}
+Modal.propTypes = {
+  toggle: PropTypes.func,
+};
 
 export default Modal;
